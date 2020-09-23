@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block header %}
+<h1>Products</h1>
+{% endblock header %}
+
+{% block content %}
+<div id="homepage-sort-buttons">
+    <button class="homepage-button" onclick="window.location.href='/?sort=1'">Sort by price (low-high)</button>
+    <button class="homepage-button" onclick="window.location.href='/?sort=2'">Sort by price (high-low)</button>
+</div>
+<div id="homepage-products">
+    {% for book in books %}
+    <div class="homepage-individual-product">
+        <div class="homepage-individual-product-left">
+            <p class="homepage-title">{{book.title}}</p>
+            <p class="homepage-author">By {{book.author}}</p>
+            <img src="{{url_for('static', filename="img/" + book.image_file)}}" height="150" width="100">
+        </div>
+        <div class="homepage-individual-product-centre">
+            <p class="homepage-price">£{{book.price}}</p>
+        </div>
+        <div class="homepage-individual-product-right">
+            <button class="homepage-button" onclick="window.location.href='/viewinfo?id={{book.book_id}}'">View</button>
+            <button class="homepage-button" onclick="window.location.href='/add_to_cart/{{book.book_id}}'">Add</button>
+            {% if current_user.is_authenticated %}
+            <button class="homepage-button" onclick="window.location.href='/add_to_wishlist/{{book.book_id}}'">Wishlist</button>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

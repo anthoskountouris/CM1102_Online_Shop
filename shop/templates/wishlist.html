@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block header %}
+<h1>Your Wishlist</h1>
+{% endblock header %}
+
+{% block content %}
+{% if wishlist_items|length > 0 %}
+<div id="wishlist-sort-buttons">
+    <button class="wishlist-button" onclick="window.location.href = '/wishlist?sort=0'">Sort by price (high-low)</button>
+    <button class="wishlist-button" onclick="window.location.href = '/wishlist?sort=1'">Sort by price (low-high)</button>
+</div>
+<div id="wishlist-products">
+    {% for item in wishlist_items %}
+    <div class="wishlist-individual-product">
+        <div class="wishlist-individual-product-left">
+            <p class="wishlist-title">{{item.item_details.title}}</p>
+            <p class="wishlist-author">By {{item.item_details.author}}</p>
+            <img src="{{url_for('static', filename="img/" + item.item_details.image_file)}}" height="150" width="100">
+        </div>
+        <div class="wishlist-individual-product-centre">
+            <p class="wishlist-price">£{{item.item_details.price}}</p>
+        </div>
+        <div class="wishlist-individual-product-right">
+            <button class="wishlist-button" onclick="window.location.href='/viewinfo?id={{item.item_details.book_id}}'">View details</button>
+            <button class="wishlist-button" onclick="window.location.href='/remove_from_wishlist/{{item.item_details.book_id}}'">Remove</button>
+            <button class="wishlist-button" onclick="window.location.href='/add_to_cart/{{item.item_details.book_id}}'">Add to cart</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>You haven't added any items to your wishlist.</p>
+{% endif %}
+{% endblock content %}

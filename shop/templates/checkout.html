@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+
+{% block header %}
+<h1>Checkout</h1>
+{% endblock header %}
+
+
+{% block content %}
+<form method="POST" action="">
+    {{ form.csrf_token }}
+    {{ form.ship_name.label (class="forms-formLabel")}} <br />
+    {{ form.ship_name(size="60", class="forms-formInput") }}<br />
+    <ul>
+        {% for error in form.ship_name.errors %}
+        <li class="forms-error">{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {{ form.ship_street.label (class="forms-formLabel")}} <br />
+    {{ form.ship_street (size="60", class="forms-formInput") }}<br />
+    <ul>
+        {% for error in form.ship_street.errors %}
+        <li class="forms-error">{{ error }}</li>
+        {% endfor %}
+    </ul>
+
+    {{ form.ship_town.label (class="forms-formLabel")}}<br />
+    {{ form.ship_town (size = 20, class="forms-formInput")}}<br />
+    <ul>
+        {% for error in form.ship_town.errors %}
+        <li class="forms-error">{{ error }}</li>
+        {% endfor %}
+    </ul>
+
+    {{ form.ship_postcode.label (class="forms-formLabel")}}<br />
+    {{ form.ship_postcode (size = 8, class="forms-formInput")}}<br />
+    <ul>
+        {% for error in form.ship_postcode.errors %}
+        <li class="forms-error">{{ error }}</li>
+        {% endfor %}
+    </ul>
+
+    {{ form.card_number.label (class="forms-formLabel")}}<br />
+    {{ form.card_number (size = 16, class="forms-formInput")}}<br />
+    <ul>
+        {% for error in form.card_number.errors %}
+        <li class="forms-error">{{ error }}</li>
+        {% endfor %}
+    </ul>
+
+    {{ form.card_ccv.label (class="forms-formLabel")}}<br />
+    {{ form.card_ccv (size = 3, class="forms-formInput")}}<br />
+    <ul>
+        {% for error in form.card_ccv.errors %}
+        <li class="forms-error">{{ error }}</li>
+        {% endfor %}
+    </ul>
+
+    <input class="forms-button" type="submit" value="Purchase">
+</form>
+{% endblock content %}

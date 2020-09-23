@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>DQS Software - Shop</title>
+        <link rel="icon" href="{{url_for('static', filename='favicon.ico')}}">
+        <link rel="stylesheet" type=text/css href="{{url_for('static',filename='stylesheet.css')}}">
+        <!-- Font Awesome Icon Library (rating stars)-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+
+    <body>
+        <!-- HEADER -->
+        <header class="header">
+            <a id="header-title" href="{{url_for('home')}}">
+                <img id="header-logo" alt="DQS Books logo" src="/static/img/logo.png">
+                <h1 id="header-title-text">QS Books</h1>
+            </a>
+            <div id="header-menu">
+                {% if current_user.is_admin %}
+                <a class="header-menu-link" href="{{url_for('admin.index')}}">Admin</a>
+                {% endif %}
+                <a class="header-menu-link" href="{{url_for('home')}}">Home</a>
+                <a class="header-menu-link" href="{{url_for('cart')}}">Cart ({{cart_quantity}} items)</a>
+                {% if current_user.is_authenticated %}
+                <a class="header-menu-link" href="{{url_for('wishlist')}}">Wishlist ({{wishlist_quantity}} items)</a>
+                {% endif %}
+                <div class="header-menu-dropdown">
+                    {% if current_user.is_authenticated %}
+                    <a class="header-menu-link" href="{{url_for('user')}}">Hello, {{ current_user.username }}!</a>
+                    <div class="header-menu-dropdown-content">
+                        <a class="header-menu-link" href="{{url_for('user')}}">Hello, {{ current_user.username }}!</a>
+                        <a class="header-menu-link" href="{{ url_for('logout') }}">Log out</a>
+                    </div>
+                    {% else %}
+                    <a class="header-menu-link" href="{{url_for('register')}}">Sign up</a>
+                    <div class="header-menu-dropdown-content">
+                        <a class="header-menu-link" href="{{url_for('register')}}">Sign up</a>
+                        <a class="header-menu-link" href="{{url_for('login')}}">Log in</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </header>
+
+        <!-- CONTENT -->
+        <section class="content">
+            {% block header %}
+            {% endblock %}
+            <hr id="hero-understrike">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul id="flashes">
+                {% for message in messages %}
+                <li class="flash">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+            {% block content %}
+            {% endblock %}
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p>
+                Welcome to DQS Books, the new big front runner in the South Wales booksales scene, stocking only the finest literature this side of the Severn.<br>
+                Stocking fiction, nonfiction, biographical, historical and now selling educational literature from a variety of topics and subjects from primary to university level.
+            </p>
+        </footer>
+    </body>
+
+</html>

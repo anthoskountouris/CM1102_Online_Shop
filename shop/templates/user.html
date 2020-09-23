@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+
+{% block header %}
+<h1>User information</h1>
+{% endblock header %}
+
+{% block content %}
+<div id="user-info">
+    <h1 class="user-section-title">User information</h1>
+    <p id="user-username"><b>Username:</b> {{current_user.username}}</p>
+    <p id="user-email"><b>Email:</b> {{current_user.email}}</p>
+</div>
+<div id="user-purchases">
+    <h1>Purchase history</h1>
+    {% if purchases|length > 0 %}
+    {% for purchase in purchases %}
+    <div class="user-individual-purchase">
+        <p><b>Purchase reference number:</b> {{purchase.purchase_id}}</p>
+        <p><b>Time of order:</b> {{purchase.purchase_timestamp}}</p>
+        <p><b>Delivery address:</b> {{purchase.purchase_ship_to}}</p>
+        <p><b>Payment card used:</b> **** **** **** {{purchase.purchase_payment[12:16]}}</p>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>You have not purchased anything yet.</p>
+    {% endif %}
+</div>
+<div id="user-reviews">
+    <h1>Reviews left</h1>
+    {% if reviews|length > 0 %}
+    {% for review in reviews %}
+    <div class="user-individual-review">
+        <p><b>Review about:</b> {{review.item_details.title}}</p>
+        <p><b>Time of review:</b> {{review.timestamp}}</p>
+        <p><b>Star rating:</b>
+            {% for n in range(review.star_rating) %}
+            <span class="fa fa-star viewitem-reviews-star-checked"></span>
+            {% endfor %}
+            {% for n in range(5 - review.star_rating)%}
+            <span class="fa fa-star"></span>
+            {% endfor %}
+        </p>
+        <p><b>Review content:</b> {{review.content}}</p>
+        <button class="user-button" onclick="window.location.href = '/delete_review/{{review.item_details.book_id}}'">Delete review</button>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>You have not left any reviews yet.</p>
+    {% endif %}
+</div>
+{% endblock content %}
+
+<!--
+User:
+    id
+    username
+    email
+    password_hash
+    is_admin
+
+Purchases:
+    purchase_id
+    purchase_user_id
+    purchase_timestamp
+    purchase_ship_to
+    purchsae_payment
+
+Purchased_items:
+    purchase_id
+    item_id
+    quantity
+
+Reviews:
+    book_about
+    reviewer_id
+    timestamp
+    star_rating
+    content
+-->

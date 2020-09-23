@@ -1,0 +1,116 @@
+{% extends 'layout.html' %}
+
+
+{% block header %}
+<h1>Product Info</h1>
+{% endblock header %}
+
+{% block content %}
+<div id="viewitem-info-base">
+    <div id="viewitem-info-top">
+        <div id="viewitem-info-top-left">
+            <img id="viewitem-image" src="{{ url_for('static', filename="img/" + book.image_file)}}">
+        </div>
+        <div id="viewitem-info-top-right">
+            <h2>{{book.title}}</h2>
+            <p id="viewitem-author">by {{book.author}}</p>
+            <p id="viewitem-isbn">ISBN: {{book.isbn_number}}</p>
+            <p id="viewitem-price">£{{book.price}}</p>
+            <div id="viewitem-buttons">
+                <button class="viewitem-button" onclick="window.location.href = '/add_to_cart/{{book.book_id}}'">Add to cart</button>
+                {% if current_user.is_authenticated %}
+                <button class="viewitem-button" onclick="window.location.href = '/add_to_wishlist/{{book.book_id}}'">Add to wishlist</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div id="viewitem-info-bottom">
+        <p>{{book.description}}</p>
+        <p><em>Published in {{book.year_published}} by {{book.publisher}}</em></p>
+    </div>
+</div>
+<hr>
+<div id="viewitem-reviews-base">
+    <h2>Reviews:</h2>
+    <div id="viewitem-reviews-new">
+        {% if current_user.is_authenticated %}
+        {% if has_not_reviewed%}
+        <p><em>Reviewing as {{current_user.username}}:</em></p>
+        <form method="POST" novalidate>
+            {{form.csrf_token}}
+            {{form.star_rating.label (class="viewitem-reviews-field-label")}}<br>
+            {{form.star_rating (class="viewitem-reviews-field-stars")}}<br>
+            <ul>
+                {% for error in form.star_rating.errors %}
+                <li>{{error}}</li>
+                {% endfor %}
+            </ul>
+            {{form.content.label (class="viewitem-reviews-field-label")}}<br>
+            {{form.content (class="viewitem-reviews-field-content")}}<br>
+            <ul>
+                {% for error in form.content.errors %}
+                <li>{{error}}</li>
+                {% endfor %}
+            </ul>
+            <input class="viewitem-button" type="submit" value="Submit review">
+        </form>
+        {% else %}
+        <p>You've already reviewed this item.</p>
+        {% endif %}
+        {% else %}
+        <p>Please log in to review this item.</p>
+        {% endif %}
+    </div>
+    <div id="viewitem-reviews-exisiting">
+        {% if revs|length > 0 %}
+        <div id="viewitem-reviews-sortbuttons">
+            <p>Sort reviews by:</p>
+            <button class="viewitem-button" onclick="window.location.href = '/viewinfo?id={{book.book_id}}&sort=0#viewitem-reviews-base'">Recently posted</button>
+            <button class="viewitem-button" onclick="window.location.href = '/viewinfo?id={{book.book_id}}&sort=1#viewitem-reviews-base'">First posted</button>
+            <button class="viewitem-button" onclick="window.location.href = '/viewinfo?id={{book.book_id}}&sort=2#viewitem-reviews-base'">Highest rating</button>
+            <button class="viewitem-button" onclick="window.location.href = '/viewinfo?id={{book.book_id}}&sort=3#viewitem-reviews-base'">Lowest rating</button>
+        </div>
+        {% for review in revs %}
+        <div class="viewitem-reviews-individual">
+            <p class="viewitem-reviews-review-title">Reviewed by <em>{{review.reviewer_details.username}}</em> on <em>{{review.timestamp}}</em>:</p>
+            <p class="viewitem-reviews-review-stars">Star rating: </p>
+            {% for n in range(review.star_rating)%}
+            <span class="fa fa-star viewitem-reviews-star-checked"></span>
+            {% endfor %}
+            {% for n in range(5 - review.star_rating)%}
+            <span class="fa fa-star"></span>
+            {% endfor %}
+            <p class="viewitem-reviews-review-content">{{review.content}}</p>
+            {% if review.reviewer_id == current_user.id %}
+            <p class="viewitem-reviews-review-delete">This is your review, you can <a href="/delete_review/{{review.book_about}}">delete it</a></p>
+            {% endif %}
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No reviews have been left yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+
+<!--
+Books:
+    book_id
+    title
+    author
+    description
+    isbn_number
+    year_published
+    publisher
+    price
+    image_file
+    purchase_counter
+    stock_level
+
+Reviews:
+    book_about
+    reviewer_id
+    timestamp
+    star_rating
+    content
+-->

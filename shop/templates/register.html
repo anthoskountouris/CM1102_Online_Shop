@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block header %}
+<h1>Registration Page</h1>
+{% endblock header %}
+
+{% block content %}
+<form method="POST" action="{{ url_for('register') }}">
+    {{ form.csrf_token }}
+    {{ form.username.label (class="forms-formLabel")}}<br />
+    {{ form.username(size="60", class="forms-formInput") }}<br />
+    <ul>
+        {% for error in form.username.errors %}
+        <li class="forms-error">{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {{ form.email.label (class="forms-formLabel")}}<br />
+    {{ form.email(size="60", class="forms-formInput") }}<br />
+    <ul>
+        {% for error in form.email.errors %}
+        <li class="forms-error">{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {{ form.password.label (class="forms-formLabel")}}<br />
+    {{ form.password(size="60", class="forms-formInput") }}<br />
+    <ul>
+        {% for error in form.password.errors %}
+        <li class="forms-error">{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {{ form.confirm_password.label (class="forms-formLabel")}}<br />
+    {{ form.confirm_password(size="60", class="forms-formInput") }}<br />
+    <ul>
+        {% for error in form.confirm_password.errors %}
+        <li class="forms-error">{{ error }}</li>
+        {% endfor %}
+    </ul>
+    <input class="forms-button" type="submit" value="Register">
+</form>
+{% endblock content %}

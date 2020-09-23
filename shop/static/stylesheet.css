@@ -1,0 +1,576 @@
+/* Global body styles */
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #8f8f8f;
+    color: #000000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+}
+
+/* Block styles for page sections - don't mess with these */
+header, section, footer {
+    display: block;
+    margin: 0;
+    background-color: #ffffff;
+    /*padding: 20px; Creates Horizontal Scroll*/
+    padding: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Styles for the four 'box' elements on every page */
+.header {
+    background-color: #000000;
+    width: calc(100% - 40px);
+    /* above line fixes horizontal scroll */
+    color: #ffffff;
+    padding: 20px;
+    overflow: hidden;
+}
+
+@media screen and (min-width: 640px) {
+    .content {
+        margin: auto;
+        max-width: 80rem;
+        /* display: flex;
+        flex-direction: column; */
+    }
+}
+
+.content {
+    padding: 40px;
+}
+
+.footer {
+    background-color: #000000;
+    width: 100%;
+    color: #ffffff;
+    text-align: center;
+    font-size: 0.75em;
+}
+
+/* Styles to make the header bar work */
+#header-title {
+    display: block;
+    float: left;
+    text-decoration: none;
+}
+
+#header-logo {
+    max-height: 3em;
+}
+
+#header-title-text {
+    display: inline;
+    position: relative;
+    bottom: 0.35em;
+    margin: 0;
+    color: #ffffff;
+    font-size: 2em;
+}
+
+#header-menu {
+    float: right;
+}
+
+.header-menu-link {
+    float: left;
+    color: #ffffff;
+    margin: 0px;
+    padding: 10px 40px;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    transition-duration: 0.3s;
+}
+
+.header-menu-link:hover {
+    background: #aaaaaa;
+}
+
+.header-menu-dropdown {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+}
+
+.header-menu-dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    margin: 0;
+}
+
+.header-menu-dropdown:hover .header-menu-dropdown-content {
+    display: block;
+}
+
+#hero-understrike {
+    width: 90%;
+    border: 4px solid black;
+    border-radius: 4px;
+}
+
+/* Styles to make the 404 page work */
+.notfound-text {
+    color: #ff0000;
+    font-style: italic;
+}
+
+/* Styles to make the flashes work */
+#flashes {
+    list-style-type: none;
+}
+
+.flash {
+    color: #ff0000;
+    font-style: italic;
+}
+
+/* Styles to make the homepage work */
+#homepage-sort-buttons {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+}
+
+#homepage-products {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.homepage-individual-product {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.homepage-individual-product-left {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.homepage-individual-product-centre {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.homepage-individual-product-right {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.homepage-title {
+    margin-bottom: 0px;
+}
+
+.homepage-author {
+    margin-top: 5px;
+    font-size: 0.75em;
+    font-style: italic;
+}
+
+.homepage-price {
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.homepage-button {
+    background-color: #8f8f8f;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    margin: 4px 2px;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+    display: inline-block;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+.homepage-button:hover {
+    background-color: #000000;
+}
+
+/* Styles to make view info page work */
+#viewitem-info-base {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+#viewitem-info-top {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+}
+
+#viewitem-info-top-left {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+#viewitem-info-top-right {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+#viewitem-info-bottom {}
+
+#viewitem-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+    object-fit: cover;
+}
+
+#viewitem-author {
+    margin-top: 5px;
+    font-size: 1em;
+    font-style: italic;
+}
+
+#viewitem-isbn {
+    margin-top: 5px;
+    font-size: 1em;
+    font-style: italic;
+}
+
+#viewitem-price {
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.viewitem-button {
+    background-color: #8f8f8f;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    margin: 4px 2px;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+    display: inline-block;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+.viewitem-button:hover {
+    background-color: #00aa00;
+}
+
+#viewitem-reviews-base {}
+
+#viewitem-reviews-new {
+    padding-left: 40px;
+}
+
+.viewitem-reviews-field-label {}
+
+.viewitem-reviews-field-stars {
+    width: 50%;
+    font-size: 1em;
+}
+
+.viewitem-reviews-field-content {
+    padding: 0.5em;
+    font-size: 0.75em;
+    width: calc(50% - 1em);
+    height: 8em;
+    border-radius: 5px;
+}
+
+#viewitem-reviews-exisiting {}
+
+.viewitem-reviews-individual {
+    margin-bottom: 50px;
+}
+
+.viewitem-reviews-review-title {
+    font-weight: bold;
+}
+
+.viewitem-reviews-review-stars {
+    padding-left: 40px;
+    display: inline;
+}
+
+.viewitem-reviews-star-checked {
+    color: #fcba03;
+}
+
+.viewitem-reviews-review-content {
+    padding-left: 40px;
+    margin-bottom: 0;
+}
+
+.viewitem-reviews-review-delete {
+    padding-left: 60px;
+    margin-top: 0.5%;
+    font-size: 0.8em;
+    color: #888888;
+}
+
+/* Styles to make the wishlist page work */
+#wishlist-sort-buttons {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+}
+
+#wishlist-products {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.wishlist-individual-product {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.wishlist-individual-product-left {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wishlist-individual-product-centre {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wishlist-individual-product-right {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.wishlist-title {
+    margin-bottom: 0px;
+}
+
+.wishlist-author {
+    margin-top: 5px;
+    font-size: 0.75em;
+    font-style: italic;
+}
+
+.wishlist-price {
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.wishlist-button {
+    background-color: #8f8f8f;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    margin: 4px 2px;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+    display: inline-block;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+.wishlist-button:hover {
+    background-color: #ff8f1f;
+}
+
+/* Styles to make the cart page work */
+#cart-products {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.cart-individual-product {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.cart-individual-product-left {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-individual-product-centre {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-individual-product-right {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.cart-title {
+    margin-bottom: 0px;
+}
+
+.cart-price {
+    margin: 5px;
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.cart-button {
+    background-color: #8f8f8f;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    margin: 4px 2px;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+    display: inline-block;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+.cart-button:hover {
+    background-color: #b30000;
+}
+
+/* Styles to make user page work */
+.user-section-title {}
+
+#user-info {}
+
+#user-username {
+    margin-left: 40px;
+    font-size: 1.25em;
+}
+
+#user-email {
+    margin-left: 40px;
+    font-size: 1.25em;
+}
+
+#user-purchases {}
+
+.user-individual-purchase {
+    margin-left: 40px;
+    padding-bottom: 20px;
+}
+
+#user-reviews {}
+
+.user-individual-review {
+    margin-left: 40px;
+    padding-bottom: 20px;
+}
+
+.user-button {
+    background-color: #8f8f8f;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    margin: 4px 2px;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+    display: inline-block;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+.user-button:hover {
+    background-color: #9e00b3;
+}
+
+/* Styles for form pages (login/signup/checkout) */
+.forms-formInput {
+    padding: 5px;
+    font-size: 1em;
+    border-radius: 5px;
+}
+
+.forms-formLabel {
+    font-size: 1em;
+}
+
+.forms-error {
+    color: red;
+}
+
+.forms-button {
+    background-color: #8f8f8f;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    margin: 4px 2px;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+    display: inline-block;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+.forms-button:hover {
+    background-color: #00968a;
+}

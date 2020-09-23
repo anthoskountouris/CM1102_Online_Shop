@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block header %}
+<h1>Shopping cart</h1>
+{% endblock header %}
+
+{% block content %}
+{% if total_quantity > 0 %}
+<div id="cart-products">
+    {% for key, value in display_cart.items() %}
+    <div class="cart-individual-product">
+        <div class="cart-individual-product-left">
+            <p class="cart-title"><b>{{value["quantity"]}}x</b> {{value["title"]}}</p>
+        </div>
+        <div class="cart-individual-product-centre">
+            <p class="cart-price">£{{value["price"]}} each</p>
+            <p class="cart-price">£{{(value["quantity"] * value["price"])}} total</p>
+        </div>
+        <div class="cart-individual-product-right">
+            <button class="cart-button" onclick="window.location.href = '/viewinfo?id={{key|int}}'">View details</button>
+            <button class="cart-button" onclick="window.location.href = '/remove_from_cart/{{key|int}}'">-1</button>
+            <button class="cart-button" onclick="window.location.href = '/add_to_cart/{{key|int}}'">+1</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<button class="cart-button" onclick="window.location.href = '/empty_cart'">Empty cart</button>
+<h3>Total: £{{ total_price }} </h3>
+<h3>Number of items: {{ total_quantity }} </h3>
+{% if current_user.is_authenticated %}
+<button class="cart-button" onclick="window.location.href = '{{url_for('checkout')}}'">Checkout</button>
+{% else %}
+<button class="cart-button" onclick="window.location.href = '{{url_for('checkout')}}'">Guest checkout</button>
+{% endif %}
+{% else %}
+<p>There is nothing in your cart.</p>
+{% endif %}
+{% endblock content %}
